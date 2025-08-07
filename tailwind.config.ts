@@ -1,25 +1,15 @@
-import type { Config } from 'tailwindcss'
-
-const config: Config = {
-  content: ['./src/**/*.{js,ts,jsx,tsx,mdx}'],
+module.exports = {
   theme: {
     extend: {
+      backgroundImage: {
+        'grain-pattern': "url('/images/grain.png')",
+      },
       colors: {
         primary: {
-          600: '#4f46e5',
-          700: '#4338ca',
+          50: '#f0f9ff',
+          600: '#2563eb',
         },
-        wood: {
-          100: '#f5e8d8',
-          400: '#d2a679',
-          800: '#5e3a1e',
-        },
-      },
-      backgroundImage: {
-        'wood-pattern': "url('/wood-texture.jpg')",
       },
     },
   },
-  plugins: [require('@tailwindcss/container-queries')],
 }
-export default config
