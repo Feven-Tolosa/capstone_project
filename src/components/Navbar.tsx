@@ -6,11 +6,12 @@ import Link from 'next/link'
 import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
 import { auth } from '../lib/firebase'
 import { useAuth } from '../hooks/useAuth'
+import { useCartStore } from '../store/cartStore'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
-
+  const { cart } = useCartStore()
   useEffect(() => {
     const handleScroll = () => {
       setScrolled(window.scrollY > 10)
@@ -105,7 +106,15 @@ export default function Navbar() {
                 className='flex-1 py-3 bg-amber-600 text-white rounded-lg font-medium flex items-center justify-center gap-2'
                 onClick={() => setIsOpen(false)}
               >
-                <ShoppingBag size={18} />
+                {/* <ShoppingBag size={18} /> */}
+                <div className='relative'>
+                  <ShoppingBag className='text-gray-700' />
+                  {cart.length > 0 && (
+                    <span className='absolute -top-2 -right-2 bg-amber-600 text-white text-xs w-5 h-5 flex items-center justify-center rounded-full'>
+                      {cart.reduce((sum, item) => sum + item.quantity, 0)}
+                    </span>
+                  )}
+                </div>
                 Cart
               </button>
             </div>
