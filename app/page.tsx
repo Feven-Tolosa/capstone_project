@@ -1,5 +1,6 @@
 import ProductCard from '@/src/components/ProductCard'
 import { products } from '@/src/data/products'
+import { Suspense } from 'react'
 
 export default function Home() {
   return (

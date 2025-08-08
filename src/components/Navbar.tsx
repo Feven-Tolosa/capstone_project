@@ -57,10 +57,10 @@ export default function Navbar() {
             {isOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
-
         {/* Mobile Menu */}
+
         {isOpen && (
-          <div className='md:hidden mt-4 pb-4 space-y-3'>
+          <div className='md:hidden mt-4 pb-4 space-y-4 bg-white rounded-lg shadow-lg p-4 animate-fade-in'>
             <MobileNavLink href='/' onClick={() => setIsOpen(false)}>
               Home
             </MobileNavLink>
@@ -74,12 +74,19 @@ export default function Navbar() {
               Contact
             </MobileNavLink>
 
-            <div className='pt-4 border-t border-gray-200 flex gap-4'>
-              <button className='flex-1 py-2 border border-gray-300 rounded-lg'>
+            <div className='pt-4 border-t border-gray-200 flex gap-3'>
+              <button
+                className='flex-1 py-3 border border-gray-300 rounded-lg font-medium'
+                onClick={() => setIsOpen(false)}
+              >
                 Sign In
               </button>
-              <button className='flex-1 py-2 bg-amber-600 text-white rounded-lg'>
-                Cart (0)
+              <button
+                className='flex-1 py-3 bg-amber-600 text-white rounded-lg font-medium flex items-center justify-center gap-2'
+                onClick={() => setIsOpen(false)}
+              >
+                <ShoppingBag size={18} />
+                Cart
               </button>
             </div>
           </div>
