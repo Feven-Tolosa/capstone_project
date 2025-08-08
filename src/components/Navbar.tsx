@@ -3,6 +3,9 @@
 import { ShoppingBag, Menu, X } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
+import { useSignInWithGoogle } from 'react-firebase-hooks/auth'
+import { auth } from '../lib/firebase'
+import { useAuth } from '../hooks/useAuth'
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -43,9 +46,26 @@ export default function Navbar() {
                 <ShoppingBag className='text-gray-700' />
                 <span className='sr-only'>Cart</span>
               </button>
-              <button className='px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-full transition-colors'>
+              {/* <button className='px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-full transition-colors'>
                 Login
-              </button>
+              </button> */}
+
+              {user ? (
+                <div className='flex items-center gap-2'>
+                  <img
+                    src={user.photoURL || '/default-avatar.jpg'}
+                    alt={user.displayName || 'User'}
+                    className='w-8 h-8 rounded-full'
+                  />
+                </div>
+              ) : (
+                <button
+                  onClick={() => signInWithGoogle()}
+                  className='px-4 py-2 bg-amber-600 hover:bg-amber-700 text-white rounded-full transition-colors'
+                >
+                  Login
+                </button>
+              )}
             </div>
           </nav>
 
@@ -97,6 +117,8 @@ export default function Navbar() {
 }
 
 // Reusable NavLink Component
+const [signInWithGoogle] = useSignInWithGoogle(auth)
+const { user } = useAuth()
 function NavLink({
   href,
   children,
